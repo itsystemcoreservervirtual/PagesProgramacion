@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Trabajo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #1e1e2f;
+        }
+        /* Barra superior horizontal */
+        .navbar {
+            width: 100%;
+            background-color: #161622;
+            color: white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 6px 15px;
+            border-bottom: 1px solid #2d2d44;
+            gap: 8px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        /* Bloque compacto izquierdo: Título arriba y enlace debajo */
+        .brand-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-right: 8px;
+            padding-right: 12px;
+            border-right: 1px solid #2d2d44;
+            line-height: 1.2;
+        }
+        .brand-box h5 {
+            font-size: 13px;
+            color: #4da8da;
+            margin: 0;
+        }
+        .brand-box a {
+            font-size: 11px;
+            color: #a0a0b8;
+            text-decoration: none;
+            margin-top: 2px;
+            transition: color 0.2s;
+        }
+        .brand-box a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        .nav-btn {
+            background-color: #252538;
+            color: #e0e0e0;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+        .nav-btn:hover, .nav-btn.active {
+            background-color: #0056b3;
+            color: white;
+        }
+        /* Contenedor principal donde carga la web */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menú superior de enlaces (de izquierda a derecha) -->
+    <div class="navbar">
+        <div class="brand-box">
+            <h5>Menu Pages</h5>
+            <a id="abrir-externo" href="https://forms.cloud.microsoft/e/Lek5g0JEGi" target="_blank">Abrir fuera ↗</a>
+        </div>
+        
+        <!-- Link 1 -->
+        <button class="nav-btn active" onclick="cargarUrl('https://dash.cloudflare.com/4ab50d6f2eb71d05a30a7c4fb3574f0e/home', this)">
+           Cloudflare
+        </button>
+
+        <!-- Link 2 -->
+        <button class="https://github.com/', this)">
+            GitHub
+        </button>
+
+        <!-- Link 3 -->
+        <button class="nav-btn" onclick="cargarUrl('https://gemini.google.com/app', this)">
+            Gemini
+        </button>
+
+        <!-- Link 4 (Copia y pega este bloque para agregar más hacia la derecha) -->
+        <button class="nav-btn" onclick="cargarUrl('https://ejemplo.com', this)">
+            Sistema CRM
+        </button>
+    </div>
+
+    <!-- Área de visualización a pantalla completa -->
+    <div class="main-content">
+        <iframe id="visor" src="https://forms.cloud.microsoft/e/Lek5g0JEGi"></iframe>
+    </div>
+
+    <script>
+        function cargarUrl(url, boton) {
+            document.getElementById('visor').src = url;
+            document.getElementById('abrir-externo').href = url;
+
+            let botones = document.querySelectorAll('.nav-btn');
+            botones.forEach(btn => btn.classList.remove('active'));
+            boton.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
