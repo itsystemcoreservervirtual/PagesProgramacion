@@ -93,37 +93,38 @@
     <div class="navbar">
         <div class="brand-box">
             <h5>Menu Pages</h5>
-            <a id="abrir-externo" href="https://www.google.com/?hl=es" target="_blank">Abrir fuera ↗</a>
+            <a id="abrir-externo" href="#" target="_blank">Abrir fuera ↗</a>
         </div>
         
-        <!-- Link 1 -->
-        <button class="nav-btn active" onclick="cargarUrl('https://www.youtube.com/?themeRefresh=1', this)">
-            Youtube
-        </button>
-
-        <!-- Link 2 -->
-        <button class="nav-btn" onclick="cargarUrl('https://github.com/', this)">
-            GitHub
-        </button>
-
-        <!-- Link 3 -->
-        <button class="nav-btn" onclick="cargarUrl('https://www.openstreetmap.org/export/embed.html', this)">
+        <!-- Link 1 (El que tenga la clase "active" cargará primero al abrir el panel) -->
+        <button class="nav-btn active" data-url="https://www.openstreetmap.org/export/embed.html" onclick="cargarUrl(this)">
             Cobertura / Mapa
         </button>
 
-        <!-- Link 4 (Copia y pega este bloque para agregar más hacia la derecha) -->
-        <button class="nav-btn" onclick="cargarUrl('https://ejemplo.com', this)">
-            Sistema CRM
+        <!-- Link 2 -->
+        <button class="nav-btn" data-url="https://es.wikipedia.org" onclick="cargarUrl(this)">
+            Wikipedia
+        </button>
+
+        <!-- Link 3 (Nota: YouTube normal bloquea iframes, pero /embed/ sí carga) -->
+        <button class="nav-btn" data-url="https://www.youtube.com/embed/" onclick="cargarUrl(this)">
+            Youtube Embed
+        </button>
+
+        <!-- Link 4 (GitHub bloquea iframes; si lo usas aquí, debes abrirlo con "Abrir fuera ↗") -->
+        <button class="nav-btn" data-url="https://github.com/" onclick="cargarUrl(this)">
+            GitHub
         </button>
     </div>
 
-    <!-- Área de visualización a pantalla completa -->
+    <!-- Área de visualización a pantalla completa (ya no tiene link fijo) -->
     <div class="main-content">
-        <iframe id="visor" src="https://forms.cloud.microsoft/e/Lek5g0JEGi"></iframe>
+        <iframe id="visor" src=""></iframe>
     </div>
 
     <script>
-        function cargarUrl(url, boton) {
+        function cargarUrl(boton) {
+            const url = boton.getAttribute('data-url');
             document.getElementById('visor').src = url;
             document.getElementById('abrir-externo').href = url;
 
@@ -131,6 +132,14 @@
             botones.forEach(btn => btn.classList.remove('active'));
             boton.classList.add('active');
         }
+
+        // Carga automáticamente el botón que tenga la clase "active" al abrir la página
+        window.onload = function() {
+            const botonInicial = document.querySelector('.nav-btn.active');
+            if (botonInicial) {
+                cargarUrl(botonInicial);
+            }
+        };
     </script>
 
 </body>
